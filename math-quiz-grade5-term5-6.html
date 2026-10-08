@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Math Quest 2 – Grade 5 (Cambridge Term 5 & 6)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --paper:#FFF9EE; --grid:#E9DFC8; --card:#FFFFFF; --ink:#1F2A5A; --muted:#5B6490;
+  --sun:#FFC93C; --mint:#2BB58A; --mint-bg:#DDF6EC; --coral:#F2554A; --coral-bg:#FFE3E0;
+  --sky:#3B8BEB; --sky-bg:#E3F0FF; --line:#D9D2BE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A3A; --grid:#1D2550; --card:#1E2755; --ink:#F5F1E3; --muted:#AAB2DD;
+    --mint-bg:#16403A; --coral-bg:#4A2430; --sky-bg:#1B3664; --line:#38427A;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A3A; --grid:#1D2550; --card:#1E2755; --ink:#F5F1E3; --muted:#AAB2DD;
+  --mint-bg:#16403A; --coral-bg:#4A2430; --sky-bg:#1B3664; --line:#38427A;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;min-height:100vh;color:var(--ink);background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  font-family:"Fredoka","Trebuchet MS","Segoe UI",system-ui,sans-serif;font-size:18px;line-height:1.45;
+}
+.wrap{max-width:720px;margin:0 auto;padding:16px 16px 48px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.logo{font-weight:700;font-size:20px;flex:1}
+.pill{background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:4px 12px;font-weight:600;font-size:15px;white-space:nowrap}
+.icon-btn{background:var(--card);border:2px solid var(--ink);border-radius:50%;width:40px;height:40px;font-size:18px;cursor:pointer;color:var(--ink)}
+.icon-btn:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:22px;padding:22px;box-shadow:6px 6px 0 var(--ink)}
+.hidden{display:none!important}
+
+/* start */
+.hero{text-align:center}
+.hero h1{font-size:clamp(34px,8vw,52px);line-height:1.05;margin:8px 0 6px}
+.hero p{color:var(--muted);margin:6px 0}
+.big-owl{font-size:88px;display:inline-block;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+.chip{background:var(--sky-bg);border:2px solid var(--sky);border-radius:999px;padding:3px 12px;font-size:14px;font-weight:500}
+.btn{font-family:inherit;font-weight:700;font-size:20px;border:3px solid var(--ink);border-radius:16px;padding:12px 26px;cursor:pointer;background:var(--sun);color:#1F2A5A;box-shadow:0 5px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.btn.alt{background:var(--card);color:var(--ink)}
+
+/* quiz */
+.progress{height:16px;border:3px solid var(--ink);border-radius:999px;background:var(--card);overflow:hidden;margin-bottom:14px}
+.progress>i{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,var(--mint),var(--mint) 10px,#4CCBA4 10px,#4CCBA4 20px);transition:width .5s cubic-bezier(.3,1.4,.5,1)}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;font-size:15px;font-weight:600}
+.topic{background:var(--sun);color:#1F2A5A;border:2px solid var(--ink);border-radius:10px;padding:2px 10px}
+.qrow{display:flex;gap:14px;align-items:flex-start}
+.mascot{font-size:50px;line-height:1;flex:none;transform-origin:50% 90%}
+.mascot.hop{animation:hop .6s}
+.mascot.shake{animation:shake .5s}
+@keyframes hop{0%{transform:translateY(0)}30%{transform:translateY(-26px) rotate(-10deg)}60%{transform:translateY(0) rotate(8deg)}80%{transform:translateY(-8px)}100%{transform:none}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px) rotate(-8deg)}40%{transform:translateX(10px) rotate(8deg)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
+.q{font-size:clamp(20px,4.6vw,26px);font-weight:600;margin:0;line-height:1.3}
+.qwrap{animation:slidein .35s ease-out}
+@keyframes slidein{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+.answers{display:grid;gap:12px;margin-top:20px}
+.opt{font-family:inherit;font-size:20px;font-weight:600;text-align:left;background:var(--card);color:var(--ink);border:3px solid var(--ink);border-radius:16px;padding:12px 16px;cursor:pointer;box-shadow:0 4px 0 var(--ink);display:flex;gap:12px;align-items:center;transition:transform .08s,box-shadow .08s,background .2s}
+.opt:hover:not(:disabled){background:var(--sky-bg);transform:translateY(-2px)}
+.opt:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.opt .k{flex:none;width:32px;height:32px;border-radius:50%;background:var(--sun);color:#1F2A5A;border:2px solid var(--ink);display:grid;place-items:center;font-size:16px}
+.opt.right{background:var(--mint-bg);border-color:var(--mint);box-shadow:0 4px 0 var(--mint);animation:pop .5s}
+.opt.wrong{background:var(--coral-bg);border-color:var(--coral);box-shadow:0 4px 0 var(--coral);animation:shake .5s}
+.opt:disabled{cursor:default}
+.yn{grid-template-columns:1fr 1fr}
+.yn .opt{justify-content:center;font-size:28px;padding:20px 10px}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.06)}100%{transform:scale(1)}}
+.numrow{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.num{flex:1;min-width:140px;font-family:inherit;font-size:26px;font-weight:600;padding:10px 14px;border:3px solid var(--ink);border-radius:14px;background:var(--card);color:var(--ink)}
+.num.right{border-color:var(--mint);background:var(--mint-bg)}
+.num.wrong{border-color:var(--coral);background:var(--coral-bg);animation:shake .5s}
+.hint{color:var(--muted);font-size:14px;margin-top:8px}
+
+.fb{margin-top:20px;border:3px solid var(--ink);border-radius:18px;padding:16px 18px;animation:rise .35s ease-out}
+.fb.good{background:var(--mint-bg);border-color:var(--mint)}
+.fb.bad{background:var(--coral-bg);border-color:var(--coral)}
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.fb h3{margin:0 0 6px;font-size:22px}
+.fb .ans{font-weight:700;margin:0 0 8px}
+.fb .why{font-size:17px;margin:0}
+.fb .why b{display:inline-block;background:var(--ink);color:var(--paper);border-radius:8px;padding:0 8px;margin-right:6px;font-size:14px}
+.fb .go{margin-top:14px;text-align:right}
+
+/* results */
+.stars{font-size:46px;letter-spacing:4px}
+.stars span{display:inline-block;animation:pop .6s both}
+.score-big{font-size:64px;font-weight:700;line-height:1}
+.bars{margin:18px 0;display:grid;gap:10px;text-align:left}
+.bar{display:grid;grid-template-columns:130px 1fr 52px;gap:10px;align-items:center;font-size:15px;font-weight:500}
+.bar .t{height:14px;border:2px solid var(--ink);border-radius:99px;background:var(--card);overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--mint);width:0;transition:width 1s ease-out}
+details{margin-top:14px;text-align:left}
+summary{cursor:pointer;font-weight:700}
+.rev{border-top:2px dashed var(--line);padding:10px 0;font-size:16px}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+@media (max-width:520px){
+  .yn{grid-template-columns:1fr 1fr}
+  .bar{grid-template-columns:96px 1fr 44px}
+  .card{padding:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="wrap">
+  <div class="top">
+    <div class="logo">🧮 Math Quest 2</div>
+    <span class="pill" id="streakPill" title="Streak">🔥 0</span>
+    <span class="pill" id="scorePill" title="Score">⭐ 0</span>
+    <button class="icon-btn" id="muteBtn" aria-label="Toggle sound">🔊</button>
+  </div>
+
+  <!-- START -->
+  <section class="card hero" id="start">
+    <div class="big-owl">🦉</div>
+    <h1>Math Quest 2</h1>
+    <p><b>Grade 5 · Cambridge Primary Stage 5</b></p>
+    <p>Term 5 &amp; Term 6 · 50 questions · multiple choice, Yes/No and type-in answers</p>
+    <div class="chips"><span class="chip">Patterns &amp; Algebra</span><span class="chip">Fractions</span><span class="chip">Decimals &amp; Percentages</span><span class="chip">Ratio &amp; Money</span><span class="chip">Area &amp; Volume</span><span class="chip">Angles &amp; Shapes</span><span class="chip">Time &amp; Units</span><span class="chip">Coordinates</span><span class="chip">Data &amp; Probability</span></div>
+    <p style="margin-bottom:18px">Every answer comes with a clear explanation. Turn your sound on!</p>
+    <button class="btn" id="startBtn">Start the quest!</button>
+    <p class="hint" style="margin-top:14px">Questions come in a random order each time.</p>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+    <div class="card">
+      <div class="meta"><span class="topic" id="topic"></span><span id="counter"></span></div>
+      <div class="qwrap" id="qwrap">
+        <div class="qrow"><div class="mascot" id="mascot">🦉</div><p class="q" id="qtext"></p></div>
+        <div class="answers" id="answers"></div>
+      </div>
+      <div id="fb" class="fb hidden" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="card hero hidden" id="result">
+    <div class="stars" id="stars"></div>
+    <h1 id="rTitle" style="font-size:34px;margin:6px 0"></h1>
+    <div class="score-big" id="rScore"></div>
+    <p id="rMsg"></p>
+    <div class="bars" id="bars"></div>
+    <button class="btn" id="againBtn">Play again</button>
+    <details id="review"><summary>Review the questions I missed</summary><div id="revList"></div></details>
+  </section>
+</div>
+
+<script>
+/* ---------------- QUESTION BANK (50) ----------------
+ type: mc = multiple choice | yn = yes/no | num = type the number
+ e = explanation                                                  */
+const Q = [
+/* Patterns & algebra */
+{t:"Patterns",type:"mc",q:"What is the next number in the sequence 3, 7, 11, 15, …?",o:["17","18","19","20"],a:"19",e:"Look at the difference between neighbours: 7 − 3 = 4, 11 − 7 = 4, 15 − 11 = 4. The rule is 'add 4', so the next term is 15 + 4 = 19."},
+{t:"Patterns",type:"num",q:"A function machine multiplies by 3, then subtracts 2. What comes out when 5 goes in?",a:13,e:"Follow the steps in order. 5 × 3 = 15, then 15 − 2 = 13."},
+{t:"Patterns",type:"num",q:"Work out: 6 + 4 × 5",a:26,e:"Order of operations (BODMAS): multiplication comes before addition. 4 × 5 = 20, then 6 + 20 = 26."},
+{t:"Patterns",type:"yn",q:"Does 20 − 3 × 4 equal 68?",a:"No",e:"Multiply first: 3 × 4 = 12. Then 20 − 12 = 8. (68 would be the answer to (20 − 3) × 4, where the brackets change the order.)"},
+{t:"Patterns",type:"num",q:"Find the missing number: □ ÷ 7 = 12",a:84,e:"Use the inverse operation. If something ÷ 7 = 12, then the something is 12 × 7 = 84. Check: 84 ÷ 7 = 12 ✓."},
+{t:"Patterns",type:"num",q:"What is 4 cubed (4³)?",a:64,e:"Cubing a number means multiplying it by itself three times: 4 × 4 × 4 = 16 × 4 = 64. It is the volume of a cube with 4-unit edges."},
+{t:"Patterns",type:"mc",q:"What is the rule for the sequence 2, 6, 18, 54, …?",o:["Add 4","Multiply by 2","Multiply by 3","Add 12"],a:"Multiply by 3",e:"Divide each term by the one before: 6 ÷ 2 = 3, 18 ÷ 6 = 3, 54 ÷ 18 = 3. The pattern multiplies by 3 each time."},
+{t:"Patterns",type:"num",q:"What is the next number: 1, 4, 9, 16, 25, …?",a:36,e:"These are the square numbers: 1², 2², 3², 4², 5². The next is 6² = 36. The gaps (3, 5, 7, 9, 11) grow by 2 each time."},
+/* Fractions, decimals, percentages */
+{t:"Fractions",type:"mc",q:"What is 1/2 × 3/4?",o:["4/6","3/4","4/8","3/8"],a:"3/8",e:"To multiply fractions, multiply the numerators and the denominators: (1 × 3) / (2 × 4) = 3/8. 'Half of three quarters' is three eighths."},
+{t:"Fractions",type:"num",q:"What is 3/5 of 40?",a:24,e:"1/5 of 40 = 40 ÷ 5 = 8. Then 3/5 = 3 × 8 = 24."},
+{t:"Fractions",type:"mc",q:"What is 1 1/2 + 2 3/4?",o:["3 3/4","4 1/4","4 3/4","3 4/6"],a:"4 1/4",e:"Add the wholes: 1 + 2 = 3. Add the fractions: 1/2 + 3/4 = 2/4 + 3/4 = 5/4 = 1 1/4. Total: 3 + 1 1/4 = 4 1/4."},
+{t:"Fractions",type:"yn",q:"Is 3/8 greater than 0.4?",a:"No",e:"Convert 3/8 to a decimal: 3 ÷ 8 = 0.375. Since 0.375 is less than 0.400, 3/8 is not greater than 0.4."},
+{t:"Decimals & %",type:"num",q:"What is 10% of 250?",a:25,e:"10% means 10/100 = 1/10. Divide by 10: 250 ÷ 10 = 25."},
+{t:"Decimals & %",type:"mc",q:"Write 3/20 as a percentage.",o:["3%","6%","15%","30%"],a:"15%",e:"Make the denominator 100: multiply top and bottom by 5. 3/20 = 15/100 = 15%."},
+{t:"Decimals & %",type:"num",q:"3.6 ÷ 4 = ?",a:0.9,e:"36 tenths shared into 4 equal groups gives 9 tenths each. So 3.6 ÷ 4 = 0.9. Check: 0.9 × 4 = 3.6 ✓."},
+{t:"Decimals & %",type:"num",q:"5.25 × 4 = ?",a:21,e:"Partition 5.25 into 5 + 0.25. 5 × 4 = 20 and 0.25 × 4 = 1. Add: 20 + 1 = 21."},
+{t:"Decimals & %",type:"mc",q:"Which number is the smallest?",o:["0.5","0.45","0.504","0.054"],a:"0.054",e:"Compare place values from the left. The tenths digits are 5, 4, 5 and 0. The number with 0 tenths, 0.054, is the smallest."},
+{t:"Decimals & %",type:"yn",q:"Is 15% of 60 equal to 9?",a:"Yes",e:"10% of 60 = 6 and 5% of 60 = 3. Add them: 6 + 3 = 9. So 15% of 60 is 9."},
+/* Ratio, proportion & money */
+{t:"Ratio & money",type:"num",q:"Red and blue beads are in the ratio 2 : 3. There are 10 red beads. How many blue beads are there?",a:15,e:"10 red beads = 2 parts, so 1 part = 5 beads. Blue is 3 parts: 3 × 5 = 15 beads."},
+{t:"Ratio & money",type:"mc",q:"Simplify the ratio 12 : 18.",o:["6 : 9","4 : 6","2 : 3","3 : 2"],a:"2 : 3",e:"Divide both numbers by their highest common factor, 6. 12 ÷ 6 = 2 and 18 ÷ 6 = 3. The simplest form is 2 : 3."},
+{t:"Ratio & money",type:"num",q:"4 pens cost $6. How much do 10 pens cost? (Type the number of dollars.)",a:15,e:"Find the cost of one pen: $6 ÷ 4 = $1.50. Then 10 pens cost 10 × $1.50 = $15."},
+{t:"Ratio & money",type:"yn",q:"5 apples cost $2. Do 15 apples cost $6?",a:"Yes",e:"15 apples is 3 times as many as 5 apples (5 × 3 = 15), so the cost is also 3 times as much: $2 × 3 = $6. This is direct proportion."},
+{t:"Ratio & money",type:"num",q:"40 marbles are shared in the ratio 3 : 1. How many marbles are in the larger share?",a:30,e:"3 + 1 = 4 parts in total. One part = 40 ÷ 4 = 10. The larger share is 3 parts = 3 × 10 = 30."},
+{t:"Ratio & money",type:"num",q:"A book costs $7.35. You pay with a $10 note. How much change do you get? (Type the number of dollars.)",a:2.65,e:"Count up from $7.35: +$0.65 gets to $8, then +$2 gets to $10. Total change: $0.65 + $2 = $2.65. (Or $10.00 − $7.35 = $2.65.)"},
+/* Area, volume & shapes */
+{t:"Area & volume",type:"num",q:"A triangle has a base of 10 cm and a height of 6 cm. What is its area in cm²?",a:30,e:"Area of a triangle = ½ × base × height = ½ × 10 × 6 = 30 cm². A triangle is exactly half of a rectangle with the same base and height."},
+{t:"Area & volume",type:"num",q:"A cuboid is 5 cm long, 4 cm wide and 3 cm high. What is its volume in cm³?",a:60,e:"Volume of a cuboid = length × width × height = 5 × 4 × 3 = 60 cm³. It is the number of 1 cm cubes that fill the shape."},
+{t:"Area & volume",type:"num",q:"A 6 cm × 4 cm rectangle has a 2 cm × 2 cm square cut out of one corner. What is the area of the remaining L-shape in cm²?",a:20,e:"Area of the whole rectangle: 6 × 4 = 24 cm². Area of the square removed: 2 × 2 = 4 cm². Remaining: 24 − 4 = 20 cm²."},
+{t:"Area & volume",type:"num",q:"What is the perimeter of a regular pentagon with sides of 7 cm? (Type the number of cm.)",a:35,e:"A regular pentagon has 5 equal sides. Perimeter = 5 × 7 = 35 cm."},
+{t:"Angles & shapes",type:"yn",q:"Is a triangle with sides 5 cm, 5 cm and 8 cm an isosceles triangle?",a:"Yes",e:"An isosceles triangle has at least two equal sides (and two equal angles). Two sides are 5 cm, so it is isosceles."},
+{t:"Angles & shapes",type:"mc",q:"How many squares are in the net of a cube?",o:["4","5","6","8"],a:"6",e:"A cube has 6 identical square faces. When the cube is unfolded flat, its net shows all 6 squares."},
+{t:"Angles & shapes",type:"mc",q:"What do the four angles of any quadrilateral add up to?",o:["180°","270°","360°","400°"],a:"360°",e:"A quadrilateral can be split into 2 triangles by one diagonal. Each triangle has 180°, so 2 × 180° = 360°."},
+{t:"Angles & shapes",type:"num",q:"Angles around a point add up to 360°. Three angles are 90°, 120° and 100°. What is the fourth angle (in degrees)?",a:50,e:"90 + 120 + 100 = 310. Then 360 − 310 = 50°."},
+{t:"Angles & shapes",type:"yn",q:"Do parallel lines ever meet?",a:"No",e:"Parallel lines are always the same distance apart, so they never meet no matter how far they are extended."},
+/* Time & units */
+{t:"Time & units",type:"mc",q:"How many millilitres are in 3.5 litres?",o:["35 ml","350 ml","3500 ml","35 000 ml"],a:"3500 ml",e:"1 litre = 1000 ml. So 3.5 × 1000 = 3500 ml."},
+{t:"Time & units",type:"num",q:"A lesson starts at 13:45 and finishes at 14:30. How many minutes does it last?",a:45,e:"From 13:45 to 14:00 is 15 minutes. From 14:00 to 14:30 is 30 minutes. Total: 15 + 30 = 45 minutes."},
+{t:"Time & units",type:"mc",q:"What is 8:15 pm in 24-hour time?",o:["08:15","18:15","20:15","21:15"],a:"20:15",e:"For times after noon, add 12 hours to the hour. 8 + 12 = 20, so 8:15 pm is 20:15."},
+{t:"Time & units",type:"yn",q:"Is 2500 m the same distance as 2.5 km?",a:"Yes",e:"1 km = 1000 m, so 2500 m ÷ 1000 = 2.5 km."},
+{t:"Time & units",type:"num",q:"One batch of cookies needs 0.75 kg of flour. How many kilograms of flour are needed for 4 batches?",a:3,e:"0.75 × 4: 0.75 is 75 hundredths, and 75 × 4 = 300 hundredths = 3.00. So 3 kg. (Think: 3/4 kg × 4 = 3 kg.)"},
+/* Coordinates */
+{t:"Coordinates",type:"mc",q:"The point (1, 3) is reflected in a vertical mirror line at x = 3. What are the coordinates of its image?",o:["(5, 3)","(3, 5)","(1, 5)","(6, 3)"],a:"(5, 3)",e:"(1, 3) is 2 squares to the left of the mirror line at x = 3. Its image is 2 squares to the right: x = 5. The y-value stays 3, giving (5, 3)."},
+{t:"Coordinates",type:"mc",q:"The point (1, 2) is translated 3 squares right and 4 squares up. Where does it land?",o:["(4, 6)","(3, 4)","(4, 2)","(5, 5)"],a:"(4, 6)",e:"Right adds to x: 1 + 3 = 4. Up adds to y: 2 + 4 = 6. The image is (4, 6)."},
+{t:"Coordinates",type:"yn",q:"Is the point (4, 0) on the x-axis?",a:"Yes",e:"Every point on the x-axis has a y-coordinate of 0. Since (4, 0) has y = 0, it lies on the x-axis, 4 units from the origin."},
+{t:"Coordinates",type:"mc",q:"The points (6, 2) and (6, 7) are joined by a straight line. What kind of line is it?",o:["Horizontal","Vertical","Diagonal","Curved"],a:"Vertical",e:"Both points have x = 6, so the line stays above the same spot on the x-axis. A line with a constant x-value is vertical."},
+/* Data & chance */
+{t:"Data & chance",type:"num",q:"What is the range of 12, 7, 19, 4 and 15?",a:15,e:"Range = largest value − smallest value = 19 − 4 = 15. It measures how spread out the data is."},
+{t:"Data & chance",type:"num",q:"What is the mean of 6, 9, 3 and 12?",a:7.5,e:"Add the values: 6 + 9 + 3 + 12 = 30. Divide by how many there are: 30 ÷ 4 = 7.5."},
+{t:"Data & chance",type:"mc",q:"Which type of graph is best for showing how a temperature changes over a day?",o:["Pictogram","Line graph","Pie chart","Tally chart"],a:"Line graph",e:"A line graph joins points in order, so it shows trends and changes over time (like rising and falling temperature)."},
+{t:"Data & chance",type:"mc",q:"A letter is picked at random from the word CAMBRIDGE. What is the probability that it is a vowel?",o:["1/9","1/3","1/2","3/6"],a:"1/3",e:"CAMBRIDGE has 9 letters. The vowels are A, I and E (3 of them). Probability = 3/9 = 1/3 in simplest form."},
+{t:"Data & chance",type:"yn",q:"When you roll a fair dice, are you equally likely to get an odd number or an even number?",a:"Yes",e:"The odd numbers are 1, 3, 5 (3 outcomes) and the even numbers are 2, 4, 6 (3 outcomes). Each has a probability of 3/6 = 1/2, so it is an 'even chance'."},
+{t:"Data & chance",type:"num",q:"A bag has 20 counters and 5 are green. What is the probability of picking a green counter, as a percentage? (Type the number only.)",a:25,e:"Probability = 5/20 = 1/4. And 1/4 = 25/100 = 25%."},
+{t:"Data & chance",type:"num",q:"A survey counted 8, 12, 5 and 15 students in four groups. How many students were surveyed in total?",a:40,e:"Add all the groups: 8 + 12 = 20, 20 + 5 = 25, 25 + 15 = 40 students."},
+{t:"Data & chance",type:"yn",q:"Is the mode of 4, 4, 5, 7, 9 equal to 5?",a:"No",e:"The mode is the value that appears most often. The number 4 appears twice and the others only once, so the mode is 4. (5 is the median.)"}
+];
+
+/* ---------------- SOUND (Web Audio, no files) ---------------- */
+let actx=null, muted=false;
+function ac(){ if(!actx){ try{ actx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(actx&&actx.state==="suspended") actx.resume(); return actx; }
+function tone(freq,start,dur,type="sine",vol=.18){
+  const a=ac(); if(!a||muted) return;
+  const o=a.createOscillator(), g=a.createGain();
+  o.type=type; o.frequency.setValueAtTime(freq,a.currentTime+start);
+  g.gain.setValueAtTime(0.0001,a.currentTime+start);
+  g.gain.exponentialRampToValueAtTime(vol,a.currentTime+start+.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,a.currentTime+start+dur);
+  o.connect(g); g.connect(a.destination); o.start(a.currentTime+start); o.stop(a.currentTime+start+dur+.05);
+}
+const sfx={
+  click(){tone(520,0,.08,"triangle",.12)},
+  right(){[523,659,784,1047].forEach((f,i)=>tone(f,i*.09,.22,"triangle",.2))},
+  wrong(){tone(220,0,.2,"sawtooth",.14);tone(165,.16,.35,"sawtooth",.14)},
+  streak(){[659,784,988,1319,1568].forEach((f,i)=>tone(f,i*.07,.25,"square",.1))},
+  win(){[523,523,523,659,784,659,784,1047].forEach((f,i)=>tone(f,i*.13,.25,"triangle",.2))},
+  ok(){[392,440,523].forEach((f,i)=>tone(f,i*.12,.25,"triangle",.18))}
+};
+
+/* ---------------- CONFETTI ---------------- */
+const cv=document.getElementById("fx"), cx=cv.getContext("2d");
+let parts=[], raf=null;
+function size(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio}
+addEventListener("resize",size); size();
+function burst(n=70,x=.5,y=.4){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cols=["#FFC93C","#2BB58A","#F2554A","#3B8BEB","#B26BFF","#FF8FB1"];
+  for(let i=0;i<n;i++){
+    const ang=Math.random()*Math.PI*2, sp=(4+Math.random()*9)*devicePixelRatio;
+    parts.push({x:cv.width*x,y:cv.height*y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp-6*devicePixelRatio,
+      s:(6+Math.random()*7)*devicePixelRatio,c:cols[i%cols.length],r:Math.random()*6,vr:(Math.random()-.5)*.4,life:90+Math.random()*40});
+  }
+  if(!raf) raf=requestAnimationFrame(tick);
+}
+function tick(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts=parts.filter(p=>p.life>0);
+  for(const p of parts){
+    p.x+=p.vx; p.y+=p.vy; p.vy+=.35*devicePixelRatio; p.vx*=.99; p.r+=p.vr; p.life--;
+    cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r); cx.globalAlpha=Math.min(1,p.life/30);
+    cx.fillStyle=p.c; cx.fillRect(-p.s/2,-p.s/3,p.s,p.s*.6); cx.restore();
+  }
+  raf = parts.length ? requestAnimationFrame(tick) : null;
+  if(!raf) cx.clearRect(0,0,cv.width,cv.height);
+}
+
+/* ---------------- GAME STATE ---------------- */
+const $=id=>document.getElementById(id);
+let deck=[], idx=0, score=0, streak=0, best=0, answered=false, log=[];
+const cheers=["Great job!","Awesome!","Brilliant!","Nailed it!","Super!","Perfect!","You got it!"];
+const oops=["Not quite.","Close one!","Let's learn from this.","Almost!"];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function start(){
+  ac(); sfx.ok();
+  deck=shuffle(Q); idx=0; score=0; streak=0; best=0; log=[];
+  updatePills();
+  $("start").classList.add("hidden"); $("result").classList.add("hidden"); $("quiz").classList.remove("hidden");
+  show();
+}
+function updatePills(){ $("scorePill").textContent="⭐ "+score; $("streakPill").textContent="🔥 "+streak; }
+
+function show(){
+  answered=false;
+  const q=deck[idx];
+  $("bar").style.width=(idx/deck.length*100)+"%";
+  $("counter").textContent=`Question ${idx+1} of ${deck.length}`;
+  $("topic").textContent=q.t;
+  $("qtext").textContent=q.q;
+  $("mascot").textContent="🦉"; $("mascot").className="mascot";
+  $("fb").classList.add("hidden");
+  const box=$("answers"); box.innerHTML=""; box.className="answers";
+  const wrap=$("qwrap"); wrap.style.animation="none"; void wrap.offsetWidth; wrap.style.animation="";
+
+  if(q.type==="mc"){
+    shuffle(q.o).forEach((t,i)=>{
+      const b=document.createElement("button"); b.className="opt";
+      b.innerHTML=`<span class="k">${"ABCD"[i]}</span><span></span>`; b.lastChild.textContent=t;
+      b.onclick=()=>check(t,b); box.appendChild(b);
+    });
+  } else if(q.type==="yn"){
+    box.classList.add("yn");
+    [["Yes","✅"],["No","❌"]].forEach(([t,em])=>{
+      const b=document.createElement("button"); b.className="opt"; b.textContent=em+" "+t;
+      b.dataset.v=t; b.onclick=()=>check(t,b); box.appendChild(b);
+    });
+  } else {
+    box.innerHTML=`<div class="numrow"><input class="num" id="numIn" inputmode="decimal" autocomplete="off" placeholder="Type your answer" aria-label="Your answer"><button class="btn" id="numGo">Check</button></div><div class="hint">Type just the number (no units). Decimals use a dot, e.g. 4.5</div>`;
+    const inp=$("numIn");
+    $("numGo").onclick=()=>{ if(inp.value.trim()==="") {inp.focus();return;} check(inp.value.trim(),inp); };
+    inp.addEventListener("keydown",e=>{ if(e.key==="Enter") $("numGo").click(); });
+    setTimeout(()=>inp.focus({preventScroll:true}),50);
+  }
+}
+
+function check(val,el){
+  if(answered) return; answered=true;
+  const q=deck[idx]; let ok;
+  if(q.type==="num"){ const n=parseFloat(String(val).replace(/,/g,".").replace(/[^\d.\-]/g,"")); ok=Math.abs(n-q.a)<1e-9; }
+  else ok = val===q.a;
+
+  // lock UI + colour
+  if(q.type==="num"){ el.classList.add(ok?"right":"wrong"); el.disabled=true; $("numGo").disabled=true; }
+  else{
+    document.querySelectorAll("#answers .opt").forEach(b=>{
+      b.disabled=true;
+      const t = q.type==="yn" ? b.dataset.v : b.lastChild.textContent;
+      if(t===q.a) b.classList.add("right");
+      else if(b===el) b.classList.add("wrong");
+    });
+  }
+
+  const m=$("mascot");
+  if(ok){
+    score+=10 + Math.min(streak,5)*2; streak++; best=Math.max(best,streak);
+    m.textContent="🤩"; m.classList.add("hop");
+    if(streak>0 && streak%5===0){ sfx.streak(); burst(110); } else { sfx.right(); burst(40); }
+  } else {
+    streak=0; m.textContent="🥺"; m.classList.add("shake"); sfx.wrong();
+  }
+  updatePills();
+  log.push({q,ok,given:val});
+
+  const shown = q.type==="num" ? String(q.a) : q.a;
+  const fb=$("fb"); fb.className="fb "+(ok?"good":"bad");
+  const extra = ok && streak>0 && streak%5===0 ? ` 🔥 ${streak} in a row!` : "";
+  fb.innerHTML=`<h3>${ok?"✅ "+rnd(cheers):"❌ "+rnd(oops)}${extra}</h3>
+    <p class="ans">${ok?"Correct answer":"The correct answer is"}: <span id="shownAns"></span></p>
+    <p class="why"><b>Why?</b><span id="whyTxt"></span></p>
+    <div class="go"><button class="btn" id="nextBtn">${idx+1===deck.length?"See my results":"Next question"}</button></div>`;
+  $("shownAns").textContent=shown; $("whyTxt").textContent=q.e;
+  $("nextBtn").onclick=next;
+  setTimeout(()=>{ fb.scrollIntoView({behavior:"smooth",block:"nearest"}); $("nextBtn").focus({preventScroll:true}); },60);
+}
+function next(){ sfx.click(); idx++; if(idx>=deck.length) finish(); else show(); }
+
+function finish(){
+  $("quiz").classList.add("hidden"); $("result").classList.remove("hidden");
+  const correct=log.filter(l=>l.ok).length, pct=Math.round(correct/deck.length*100);
+  const st = pct>=90?3: pct>=70?2: pct>=40?1:0;
+  $("stars").innerHTML=[0,1,2].map(i=>`<span style="animation-delay:${i*.25}s;${i<st?"":"filter:grayscale(1);opacity:.35"}">⭐</span>`).join("");
+  $("rTitle").textContent = pct>=90?"Math champion! 🏆": pct>=70?"Great work! 🎉": pct>=40?"Good effort! 💪":"Keep practising! 🌱";
+  $("rScore").textContent=`${correct} / ${deck.length}`;
+  $("rMsg").textContent=`${pct}% correct · ${score} points · best streak ${best} 🔥`;
+  // topics
+  const by={}; log.forEach(l=>{const k=l.q.t;(by[k]=by[k]||{c:0,n:0}).n++; if(l.ok) by[k].c++;});
+  $("bars").innerHTML=Object.entries(by).map(([k,v])=>{const p=Math.round(v.c/v.n*100);
+    return `<div class="bar"><span>${k}</span><span class="t"><i data-w="${p}"></i></span><span>${v.c}/${v.n}</span></div>`}).join("");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll(".bar i").forEach(i=>i.style.width=i.dataset.w+"%")));
+  // review
+  const wrong=log.filter(l=>!l.ok);
+  $("review").classList.toggle("hidden",wrong.length===0);
+  $("revList").innerHTML=wrong.map(l=>`<div class="rev"><b></b><br><span></span></div>`).join("");
+  document.querySelectorAll("#revList .rev").forEach((d,i)=>{
+    d.querySelector("b").textContent=wrong[i].q.q;
+    d.querySelector("span").textContent=`Answer: ${wrong[i].q.a}. ${wrong[i].q.e}`;
+  });
+  sfx.win(); burst(150,.5,.3); setTimeout(()=>burst(100,.25,.35),350); setTimeout(()=>burst(100,.75,.35),600);
+  scrollTo({top:0,behavior:"smooth"});
+}
+
+$("startBtn").onclick=start;
+$("againBtn").onclick=start;
+$("muteBtn").onclick=()=>{ muted=!muted; $("muteBtn").textContent=muted?"🔇":"🔊"; if(!muted){ac();sfx.click();} };
+</script>
+</body>
+</html>
